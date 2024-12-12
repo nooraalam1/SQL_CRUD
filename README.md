@@ -1,4 +1,3 @@
-## SQL_CRUD
 # Connection
 
     var mysql = require('mysql2');
@@ -8,3 +7,12 @@
     password: "",
     database: "students_db"
     });
+
+# Fetch
+    app.get('/fetch', (req, res) => {
+    const q = "SELECT * from students"
+    db.query(q,(err,data)=>{
+    if(err) return res.json(err)
+    return res.json(data) 
+    })
+    })
