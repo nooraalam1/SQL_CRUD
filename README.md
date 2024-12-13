@@ -8,7 +8,7 @@
     database: "students_db"
     });
 
-# Fetch
+# Fetch (Server)
     app.get('/fetch', (req, res) => {
     const q = "SELECT * from students"
     db.query(q,(err,data)=>{
@@ -16,3 +16,10 @@
     return res.json(data) 
     })
     })
+# Client
+    const [data, setData] = useState([])
+    useEffect(() => {
+        axios.get('http://localhost:3000/fetch')
+            .then(res => setData(res.data))
+            .catch(err => console.log(err))
+    }, [])
