@@ -16,7 +16,7 @@
     return res.json(data) 
     })
     })
-# Client
+# Fetch (Client)
     const [data, setData] = useState([])
     useEffect(() => {
         axios.get('http://localhost:3000/fetch')
@@ -34,7 +34,7 @@
     })
     })
 
-# Client
+#  Create (Client)
     const handleSubmit = (e) => {
         e.preventDefault()
         const id = e.target.id.value;
@@ -48,4 +48,26 @@
         axios.post('http://localhost:3000/create', values)
             .then(res => console.log(res.data))
             .catch(err => console.log(err))
+    }
+# Delete (Server)
+    app.delete('/cartItems', (req, res) => {
+    const { email, id } = req.query; 
+    const sqlQuery = "DELETE FROM cart WHERE email = ? AND _id = ?";
+    db.query(sqlQuery, [email, id], (err, result) => {
+      if (err) {
+        console.log(err)
+          return res.status(500).send('Error deleting cart item');
+      }
+      res.status(200).send('Cart item deleted successfully');
+    });
+    });
+
+# Delete (Client)
+    function handleDelete(x){
+    
+    const id = x._id;       
+    axios.delete(`http://localhost:3000/cartItems?email=${user?.email}&&id=${id}`) 
+    then(res => console.log(res.data))
+    .catch(err => console.log(err));         
+        
     }
