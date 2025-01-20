@@ -71,3 +71,17 @@
     .catch(err => console.log(err));         
         
     }
+
+
+
+
+
+# Add Unique Email To DB
+    app.post('/userInfo',(req,res)=>{
+    const {name,email} = req.body
+    const q ="INSERT INTO user_info (name, email) SELECT ?, ? WHERE NOT EXISTS (SELECT 1 FROM user_info WHERE email = ?)";
+    db.query(q, [name,email,email],(err,data)=>{
+    if(err) return res.json(err)
+    return res.json(data) 
+    })
+    })
