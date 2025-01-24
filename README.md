@@ -39,12 +39,8 @@
         e.preventDefault()
         const id = e.target.id.value;
         const name = e.target.name.value;
-        const roll = e.target.roll.value;
-        const fees = e.target.fees.value;
-        const classs = e.target.classs.value;
-        const medium = e.target.medium.value;
-        console.log(id, name, roll, fees, classs, medium)
-        const values = { id, name, roll, fees, classs, medium }
+       
+        const values = { id, name}
         axios.post('http://localhost:3000/create', values)
             .then(res => console.log(res.data))
             .catch(err => console.log(err))
